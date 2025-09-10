@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sansation:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Product Section */
+    .product {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 20px;
+      flex-wrap: wrap;
+      min-height: 200px;
+    }
+
+    .product img {
+      width: 50%;
+      object-fit: cover;
+      height: 85vh;
+    }
+
+    .product-details {
+      width: 25%;
+      display: flex;
+      flex-direction: column;
+      height: 85vh;
+    }
+
+    .product-details h2 {
+      font-size: 20px;
+      margin-top: 70px;
+    }
+
+    .product-details p {
+      font-size: 16px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      padding-top: 30px;
+    }
+
+    .size-options button {
+      padding: 10px;
+      margin-top: 30px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      width: 89px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .add-button {
+      padding: 10px;
+      margin-top: 30px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      width: 368px;
+      transition: background 0.2s, color 0.2s;
+      margin-bottom: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .add-button {
+        width: 100%;
+      }
+    }
+
+    /* Remove hover effect */
+    .size-options button:hover,
+    .add-button:hover {
+      background-color: #333;
+      color: #fff;
+    }
+
+    /* Active/clicked style */
+    .size-options button.selected,
+    .add-button.clicked {
+      background-color: #fff;
+      color: #000;
+      border: 1px solid #333;
+    }
+
+    .info-sections p {
+      margin-top: 10px;
+      border-bottom: 1px solid #ccc;
+      padding: 20px 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .product img {
+        width: 100%;
+        height: auto;
+      }
+
+      .product-details {
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      .size-options button {
+        padding: 8px 12px;
+      }
+
+      /* ✅ Smooth mobile navbar */
+      #navMenu {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 15px;
+        padding: 0 15px;
+        background: #faf9f6;
+        border-top: 1px solid #ddd;
+        transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.3s ease;
+      }
+      #navMenu.show {
+        max-height: 500px; /* adjust if needed */
+        opacity: 1;
+        padding: 15px;
+      }
+    }
+
+    .dropdown {
+      display: none;
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #f2f2f2;
+      border: none;
+      outline: none;
+      box-shadow: none;
+    }
+
+    .dropdown p {
+      margin: 0;
+      border: none;
+      outline: none;
+    }
+
+    #info1, #info2, #info3 {
+      cursor:pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #arrow1 {
+      transition: transform 0.3s;
+    }
+
+    /* Close / back button */
+    .back-btn {
+      position: absolute;
+      top: 15px;
+      right: 10px;
+      font-size: 20px;
+      color: #0c0c0c;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+    header {
+        padding: 4px 20px;
+    }
+
+    .header-left {
+        gap: 12px; /* Reduced spacing */
+    }
+
+    #hello {
+        font-size: 28px;
+        padding-left: 80px; /* Slightly reduced */
+    }
+
+    .header-right {
+        gap: 40px; /* Reduced spacing */
+        flex-direction: row; /* Horizontal layout like desktop */
+        align-items: center;
+    }
+
+    .header-right input {
+        padding-right: 30px; /* Reduced spacing */
+    }
+
+    #openSearch {
+        width: 120px;
+        transform: translateX(10px);
+        display: inline-block; /* Same as desktop */
+    }
+
+    #navMenu {
+        max-height: none; /* Always visible like desktop */
+        opacity: 1;
+        flex-direction: row; /* Horizontal layout like desktop */
+        align-items: center;
+        width: auto;
+        padding: 0;
+        background: none;
+        border-top: none;
+        overflow: visible; /* Ensure no clipping */
+    }
+
+    #navMenu > p.search-trigger,
+    #navMenu > span {
+        display: inline-block; /* Inline like desktop */
+        width: auto;
+        text-align: center;
+        font-size: 16px;
+        padding: 5px 0; /* Reduced padding */
+        border-bottom: none;
+    }
+
+    .menu-btn {
+        display: flex; /* Show menu button in tablet view like desktop */
+        padding-right: 30px; /* Reduced spacing */
+    }
+}
+
+
+    @media (max-width: 480px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 10px;
+        text-align: left;
+      }
+      .left-section {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 10px;
+        padding-left: 0;
+      }
+      #hello {
+        font-size: 24px;
+        padding-left: 10px;
+        margin-top: 10px;
+      }
+    }
+
+    body {
+      font-family: 'Sansation', sans-serif;
+      font-weight: 300;
+      font-style: normal;
+      margin: 0;
+      padding: 0;
+      background-color: #faf9f6;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header Styling */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 30px;
+      background-color: #faf9f6;
+    }
+
+    .left-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .menu-btn {
+      font-size: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding-right: 50px;
+    }
+
+    #hello {
+      font-size: 30px;
+      font-weight: bold;
+      margin: 0;
+      padding: 0;
+      padding-left: 100px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 80px;
+    }
+
+    .header-right input {
+      padding: 10px;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      padding-right: 60px;
+    }
+
+    .header-right span {
+      cursor: pointer;
+    }
+
+    #openSearch {
+      transform: translateX(18px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+      padding-bottom: 5px;
+      display: inline-block;
+      width: 150px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .menu-btn {
+      font-size: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .menu-btn .bar {
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: #222;
+      border-radius: 2px;
+      transition: transform 0.4s, opacity 0.4s;
+    }
+
+    /* Hamburger to X transition */
+    .menu-btn.active .bar:nth-child(1) {
+      transform: translateY(11px) rotate(55deg);
+    }
+    .menu-btn.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-btn.active .bar:nth-child(3) {
+      transform: translateY(-11px) rotate(-55deg);
+    }
+
+    /* Fix search alignment in mobile */
+    @media (max-width: 768px) {
+      #navMenu > p.search-trigger,
+      #navMenu > span {
+        display: block;
+        width: 100%;
+        text-align: left;
+        font-size: 16px;
+        cursor: pointer;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      #openSearch {
+        margin: 0;
+        transform: none !important;
+      }
+    }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 25px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background: #333;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+  <section id="head">
+    <header>
+      <div class="left-section">
+        <div class="menu">
+          <button id="menu-btn" class="menu-btn" style="padding:0; background:none; border:none; cursor:pointer;">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+        </div>
+        <h1 id="hello">ZYRAA</h1>
+      </div>
+
+      <!-- Nav Menu -->
+      <div class="header-right" id="navMenu">
+       
+        <p id="openSearch" class="search-trigger">Search</p>
+        <span>Login</span>
+        <span>Add to collection</span>
+      </div>
+    </header>
+  </section>
+
+  <main>
+    <section class="product">
+      <img src="pics/123.jpg" alt="Product Image">
+      <div class="product-details">
+        <h2>Summer outfits for men | Summer wear</h2>
+        <p>₹2370.00 (inc of all taxes)</p>
+        <div class="size-options">
+          <button>M</button>
+          <button>L</button>
+          <button>XL</button>
+          <button>XXL</button>
+        </div>
+        <button class="add-button">ADD</button>
+        <span id="cart-feedback" style="display:none; margin-left:10px; color:rgb(0, 0, 0); font-weight:bold;">
+          <span style="font-size:18px;">&#10003;</span> Product added to cart
+        </span>
+        <div class="info-sections">
+          <p id="info1">Product Details <span id="arrow1" style="font-size: 20px;">&#8250;</span></p>
+          <div class="dropdown" id="dropdown1">
+            <p>This product is made of 100% cotton.</p>
+          </div>
+          <p id="info2">Payment Options <span id="arrow2" style="font-size: 20px;">&#8250;</span></p>
+          <p id="info3">Delivery & Returns <span id="arrow3" style="font-size: 20px;">&#8250;</span></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('menu-btn').addEventListener('click', function () {
+      this.classList.toggle('active');
+      document.getElementById('navMenu').classList.toggle('show');
+    });
+
+    function toggleDropdown(infoId, dropdownId, arrowId) {
+      const dropdown = document.getElementById(dropdownId);
+      const arrow = document.getElementById(arrowId);
+      const isOpen = dropdown.style.display === 'block';
+      dropdown.style.display = isOpen ? 'none' : 'block';
+      arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
+    }
+
+    document.getElementById("info1").addEventListener("click", function() {
+      toggleDropdown("info1", "dropdown1", "arrow1");
+    });
+
+    document.getElementById("info2").addEventListener("click", function() {
+      window.location.href = "payment.html";
+    });
+
+    document.getElementById("info3").addEventListener("click", function() {
+      window.location.href = "finish.html";
+    });
+
+    // ✅ Simple navigation to search.html
+    document.getElementById("openSearch").addEventListener("click", function() {
+      window.location.href = "search.html";
+    });
+
+    document.querySelectorAll('.size-options button').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.size-options button').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+      });
+    });
+
+    const addBtn = document.querySelector('.add-button');
+    const cartFeedback = document.getElementById('cart-feedback');
+    addBtn.addEventListener('click', function() {
+      this.classList.add('clicked');
+      cartFeedback.style.display = 'inline-block';
+      setTimeout(() => {
+        this.classList.remove('clicked');
+        cartFeedback.style.display = 'none';
+      }, 2000);
+    });
+
+    // Auto-close nav menu when clicking a link (mobile only)
+    document.querySelectorAll('#navMenu > span, #navMenu > p').forEach(item => {
+      item.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          navMenu.classList.remove('show');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
